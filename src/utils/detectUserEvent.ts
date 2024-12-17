@@ -3,8 +3,8 @@
  * Calls the provided callback when a navigation event is detected.
  * @param onNavigate - Callback function to execute on navigation detection.
  */
-export function detectNavigation(onNavigate: () => void): void {
-  ['click', 'mousemove', 'keydown'].forEach((eventName) => {
-    document.addEventListener(eventName, onNavigate, { once: true });
-  });
+export function detectUserEvent(onNavigate: () => void): void {
+  // ['click', 'mousemove', 'keydown'].forEach((eventName) => {
+  //   document.addEventListener(eventName, onNavigate, { once: true });
+  // });
 }

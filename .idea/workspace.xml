@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abe4c80e-7770-4719-976e-2292e5db5fc7" name="변경" comment="">
+    <list default="true" id="abe4c80e-7770-4719-976e-2292e5db5fc7" name="변경" comment="# cjs -&gt; esm">
+      <change afterPath="$PROJECT_DIR$/dist/closeping.cjs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/closeping.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/closeping.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/types/core/setupTabCloseHandlers.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/types/core/setupTabCloseHandlers.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/types/utils/navigationDetector.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/handleClosePing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/handleClosePing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/setupTabCloseHandlers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/setupTabCloseHandlers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/navigationDetector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/detectUserEvent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +29,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "wjdghks963"
+  }
+}]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/wjdghks963/close-ping.git",
@@ -43,7 +61,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "feat/checking",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,11 +86,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1734352217904</updated>
-      <workItem from="1734352218948" duration="2179000" />
+      <workItem from="1734352218948" duration="9473000" />
     </task>
+    <task id="LOCAL-00001" summary="# cjs -&gt; esm">
+      <option name="closed" value="true" />
+      <created>1734354510810</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734354510810</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="# cjs -&gt; esm" />
+    <option name="LAST_COMMIT_MESSAGE" value="# cjs -&gt; esm" />
   </component>
 </project>

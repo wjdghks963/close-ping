@@ -4,53 +4,72 @@ type TabCloseHandlerConfig = {
   url: string;
   data: object;
   useBeacon: boolean;
-  isNavigation: () => boolean; // Function to check if navigation occurred
-  resetNavigation: () => void; // Function to reset navigation state
+  resetNavigation: () => void;
 };
 
-/**
- * Sets up event listeners to handle tab close events.
- * @param config - Configuration object for tab close handlers.
- */
 export function setupTabCloseHandlers({
                                         url,
                                         data,
                                         useBeacon,
-                                        isNavigation,
                                         resetNavigation,
                                       }: TabCloseHandlerConfig): void {
   let isSent = false;
+  let isNavigating = false;
+  let isReloading = false;
 
-  const sendOnClose = async () => {
-    if (isSent) return; // Prevent duplicate execution
+  // sendOnClose: 요청 전송 함수
+  const sendOnClose = () => {
+    if (isSent) return;
     isSent = true;
 
     try {
-      if (useBeacon) {
-        const success = navigator.sendBeacon(url, JSON.stringify(data));
-        if (!success) await sendData(url, data); // Fallback to fetch with Keep-Alive
+      const payload = JSON.stringify(data);
+      if (useBeacon && navigator.sendBeacon) {
+        navigator.sendBeacon(url, payload);
       } else {
-        await sendData(url, data);
+        sendData(url, data);
       }
+    } catch (error) {
+      console.error('Error while sending data:', error);
     } finally {
-      resetNavigation(); // Reset navigation state after request
+      resetNavigation();
     }
   };
 
-  // Listen for tab close events
-  window.addEventListener(
-    'pagehide',
-    (event) => {
-      if (!event.persisted && !isNavigation()) sendOnClose();
-    },
-    { once: true },
-  );
+  // 새로고침 감지
+  //@ts-ignore
+  const navType = performance.getEntriesByType('navigation')[0]?.type;
+  isReloading = navType === 'reload' || navType === 'back_forward' || navType === 'navigate';
 
-  window.addEventListener(
-    'beforeunload',
-    () => {
-      if (!isNavigation()) sendOnClose();
-    },
-    { once: true },
-  );
+  // 페이지 이동 감지
+  window.addEventListener('popstate', () => {
+    isNavigating = true;
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLAnchorElement;
+    if (target.tagName === 'A' && target.href) {
+      isNavigating = true;
+    }
+  });
+
+  // beforeunload: 최종 백업
+  window.addEventListener('beforeunload', (event) => {
+    if (!isNavigating && !isReloading) {
+      sendOnClose();
+    }
+  });
+
+  // pagehide: iOS Safari 대응
+  window.addEventListener('pagehide', (event) => {
+    if (!isNavigating && !isReloading) {
+      sendOnClose();
+    }
+  });
+
+  // pageshow: 플래그 초기화
+  window.addEventListener('pageshow', () => {
+    isNavigating = false;
+    isReloading = false;
+  });
 }

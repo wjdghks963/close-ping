@@ -1,4 +1,4 @@
-import { detectNavigation } from '@utils/navigationDetector';
+import { detectUserEvent } from '@utils/detectUserEvent';
 import { setupTabCloseHandlers } from './setupTabCloseHandlers';
 import { ClosePingConfig } from '../types';
 
@@ -7,15 +7,15 @@ import { ClosePingConfig } from '../types';
  * @param config - Configuration object containing the URL and data.
  */
 export function handleClosePing({ url, data, useBeacon = true }: ClosePingConfig): void {
-  let isNavigation = false;
+  let isUserEventTriggered = false;
 
   const resetNavigation = () => {
-    isNavigation = false; // Reset navigation state
+    isUserEventTriggered = false; // Reset navigation state
   };
 
   // Detect navigation events
-  detectNavigation(() => {
-    isNavigation = true;
+  detectUserEvent(() => {
+    isUserEventTriggered = true;
   });
 
   // Setup tab close handlers
@@ -23,7 +23,6 @@ export function handleClosePing({ url, data, useBeacon = true }: ClosePingConfig
     url,
     data,
     useBeacon,
-    isNavigation: () => isNavigation,
     resetNavigation,
   });
 }
