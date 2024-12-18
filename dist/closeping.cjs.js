@@ -58,14 +58,12 @@ function sendData(url, data) {
 }
 
 function setupTabCloseHandlers({ url, data, useBeacon, resetNavigation, }) {
-    var _a;
-    let isSent = false;
-    let isNavigating = false;
-    let isReloading = false;
-    // sendOnClose: 요청 전송 함수
+    const SESSION_KEY = 'tab_activity_count';
+    let isSent = false; // 요청 중복 방지
+    let isNavigating = false; // 페이지 이동 여부
     const sendOnClose = () => {
         if (isSent)
-            return;
+            return; // 중복 실행 방지
         isSent = true;
         try {
             const payload = JSON.stringify(data);
@@ -83,10 +81,19 @@ function setupTabCloseHandlers({ url, data, useBeacon, resetNavigation, }) {
             resetNavigation();
         }
     };
-    // 새로고침 감지
-    //@ts-ignore
-    const navType = (_a = performance.getEntriesByType('navigation')[0]) === null || _a === void 0 ? void 0 : _a.type;
-    isReloading = navType === 'reload' || navType === 'back_forward';
+    const incrementSessionCount = () => {
+        const count = parseInt(sessionStorage.getItem(SESSION_KEY) || '0', 10);
+        sessionStorage.setItem(SESSION_KEY, (count + 1).toString());
+    };
+    const resetSessionCount = () => {
+        sessionStorage.setItem(SESSION_KEY, '0');
+    };
+    const isSessionCountZero = () => {
+        const count = parseInt(sessionStorage.getItem(SESSION_KEY) || '0', 10);
+        return count === 0;
+    };
+    // 세션 초기화
+    resetSessionCount();
     // 페이지 이동 감지
     window.addEventListener('popstate', () => {
         isNavigating = true;
@@ -97,22 +104,28 @@ function setupTabCloseHandlers({ url, data, useBeacon, resetNavigation, }) {
             isNavigating = true;
         }
     });
-    // beforeunload: 최종 백업
-    window.addEventListener('beforeunload', (event) => {
-        if (!isNavigating && !isReloading) {
+    // visibilitychange: 탭 닫기와 전환 구분
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            incrementSessionCount();
+        }
+    });
+    // beforeunload: 요청 실행
+    window.addEventListener('beforeunload', () => {
+        if (isSessionCountZero() && !isNavigating) {
             sendOnClose();
         }
     });
     // pagehide: iOS Safari 대응
     window.addEventListener('pagehide', (event) => {
-        if (!isNavigating && !isReloading) {
+        if (isSessionCountZero() && !isNavigating && !event.persisted) {
             sendOnClose();
         }
     });
-    // pageshow: 플래그 초기화
+    // pageshow: 세션 초기화
     window.addEventListener('pageshow', () => {
+        resetSessionCount();
         isNavigating = false;
-        isReloading = false;
     });
 }
 

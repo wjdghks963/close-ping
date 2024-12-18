@@ -13,13 +13,13 @@ export function setupTabCloseHandlers({
                                         useBeacon,
                                         resetNavigation,
                                       }: TabCloseHandlerConfig): void {
-  let isSent = false;
-  let isNavigating = false;
-  let isReloading = false;
+  let isSent = false; // 요청 중복 방지
+  let isNavigating = false; // 페이지 이동 여부
+  let isReloading = false; // 새로고침 여부
+  let isTabClosing = false; // 탭 닫힘 여부
 
-  // sendOnClose: 요청 전송 함수
   const sendOnClose = () => {
-    if (isSent) return;
+    if (isSent) return; // 중복 실행 방지
     isSent = true;
 
     try {
@@ -36,10 +36,23 @@ export function setupTabCloseHandlers({
     }
   };
 
-  // 새로고침 감지
+  // 초기 로드 및 새로고침 상태 확인
   //@ts-ignore
   const navType = performance.getEntriesByType('navigation')[0]?.type;
-  isReloading = navType === 'reload' || navType === 'back_forward' || navType === 'navigate';
+  isReloading = navType === 'reload' || navType === 'back_forward';
+
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      isReloading = true;
+    } else {
+      const navEntry = performance.getEntriesByType('navigation')[0];
+      //@ts-ignore
+      isReloading = navEntry?.type === 'reload' || navEntry?.type === 'back_forward';
+    }
+    isNavigating = false;
+    isTabClosing = false;
+    isSent = false;
+  });
 
   // 페이지 이동 감지
   window.addEventListener('popstate', () => {
@@ -53,23 +66,33 @@ export function setupTabCloseHandlers({
     }
   });
 
-  // beforeunload: 최종 백업
-  window.addEventListener('beforeunload', (event) => {
+  // visibilitychange: 탭 닫기와 전환 구분
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (!isNavigating && !isReloading && !isTabClosing) {
+        isTabClosing = true; // 탭 닫힘으로 간주
+        sendOnClose(); // 요청 실행
+      } else {
+        console.log('Tab switch detected, no request sent.');
+      }
+    }
+  });
+
+  // beforeunload: 최종 요청 처리
+  window.addEventListener('beforeunload', () => {
     if (!isNavigating && !isReloading) {
-      sendOnClose();
+      isTabClosing = true; // 탭 닫힘 설정
+      sendOnClose(); // 백업 요청
     }
   });
 
   // pagehide: iOS Safari 대응
   window.addEventListener('pagehide', (event) => {
-    if (!isNavigating && !isReloading) {
-      sendOnClose();
+    if (!event.persisted) {
+      isTabClosing = true; // 탭 닫힘 설정
+      if (!isNavigating && !isReloading) {
+        sendOnClose();
+      }
     }
-  });
-
-  // pageshow: 플래그 초기화
-  window.addEventListener('pageshow', () => {
-    isNavigating = false;
-    isReloading = false;
   });
 }

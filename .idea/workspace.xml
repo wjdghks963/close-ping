@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abe4c80e-7770-4719-976e-2292e5db5fc7" name="변경" comment="# cjs -&gt; esm">
-      <change afterPath="$PROJECT_DIR$/dist/closeping.cjs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/closeping.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/closeping.min.js" afterDir="false" />
+    <list default="true" id="abe4c80e-7770-4719-976e-2292e5db5fc7" name="변경" comment="# 이벤트 추적 방법 수정 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/types/core/setupTabCloseHandlers.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/types/core/setupTabCloseHandlers.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/types/utils/navigationDetector.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/handleClosePing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/handleClosePing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/closeping.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/closeping.cjs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/closeping.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/closeping.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/closeping.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/closeping.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/setupTabCloseHandlers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/setupTabCloseHandlers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/navigationDetector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/detectUserEvent.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,41 +32,41 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "wjdghks963"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;wjdghks963&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/wjdghks963/close-ping.git",
-    "accountId": "cd606a08-3e08-4ce8-9f4c-fe7f0905965a"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/wjdghks963/close-ping.git&quot;,
+    &quot;accountId&quot;: &quot;cd606a08-3e08-4ce8-9f4c-fe7f0905965a&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2qIZng8gWZzBwELr94fYJ994biA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/checking",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/junghwan/WebstormProjects/ClosePing/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/checking&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/junghwan/WebstormProjects/ClosePing/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -86,7 +82,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1734352217904</updated>
-      <workItem from="1734352218948" duration="9473000" />
+      <workItem from="1734352218948" duration="9541000" />
+      <workItem from="1734529200139" duration="1904000" />
     </task>
     <task id="LOCAL-00001" summary="# cjs -&gt; esm">
       <option name="closed" value="true" />
@@ -96,7 +93,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734354510810</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="# 이벤트 추적 방법 수정 테스트">
+      <option name="closed" value="true" />
+      <created>1734442757462</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734442757462</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,6 +109,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="# cjs -&gt; esm" />
-    <option name="LAST_COMMIT_MESSAGE" value="# cjs -&gt; esm" />
+    <MESSAGE value="# 이벤트 추적 방법 수정 테스트" />
+    <option name="LAST_COMMIT_MESSAGE" value="# 이벤트 추적 방법 수정 테스트" />
   </component>
 </project>
